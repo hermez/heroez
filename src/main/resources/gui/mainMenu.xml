@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty>
+
+    <useStyles filename="heroez-gui-styles.xml"/>
+    <useControls filename="nifty-default-controls.xml"/>
+
+    <registerSound id="select" filename="sound/select.ogg"/>
+
+    <style id="special-scrollpanel#scrollpanel">
+    </style>
+
+    <!--<style id="menu">-->
+        <!--<attributes align="left" valign="center" width="1024px" height="409px"/>-->
+    <!--</style>-->
+    <style id="menu-font">
+        <attributes font="aurulent-sans-36-bold-with-shadow.fnt"/>
+    </style>
+
+    <style id="menu-item" base="menu-font">
+        <attributes align="center" textHAlign="center" color="#7f9465ff" width="100%"
+                    focusable="true"
+                    controller="de.lessvoid.nifty.controls.MenuItemControl"
+                    inputMapping="de.lessvoid.nifty.input.mapping.MenuInputMapping"/>
+        <effect>
+            <onHover name="focus"/>
+            <!--<onFocus name="hint" targetElement="hintElement" hintText="$hintText"/>-->
+            <onFocus name="colorBar" width="70%" height="110%" color="#0024"/>
+            <onFocus name="textColor" color="#b3b11bff"/>
+            <onFocus name="textSize" startSize="1.0" endSize="1.1" length="130"/>
+            <onFocus name="playSound" sound="select"/>
+            <!--<onGetFocus name="updateScrollpanelPositionToDisplayElement" target="menuScrollPanel" oneShot="true"/>-->
+            <!--<onGetFocus name="show" targetElement="$targetElement" oneShot="true"/>-->
+            <onLostFocus name="textSize" startSize="1.1" endSize="1.0"/>
+            <!--<onLostFocus name="hide" targetElement="$targetElement" oneShot="true"/>-->
+        </effect>
+    </style>
+
+
+    <screen id="start" controller="net.hermesprime.rpg.heroez.gui.controller.MainMenuScreen">
+
+        <!--<layer id="top" childLayout="vertical" backgroundImage="background.png">-->
+        <!--&lt;!&ndash;<effect>&ndash;&gt;-->
+        <!--&lt;!&ndash;<onStartScreen name="fade" start="#0" end="#f" length="500" alternateEnable="fade"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<onEndScreen name="fade" startColor="#393939ff" endColor="#00000000" startDelay="1000" length="500" alternateEnable="fade"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;</effect>&ndash;&gt;-->
+        <!--<panel id="panel" width="100%" height="30%" childLayout="center">-->
+        <!--<image id="image" filename="demo-logo.png" align="center" valign="center">-->
+        <!--&lt;!&ndash;<effect>&ndash;&gt;-->
+        <!--&lt;!&ndash;<onStartScreen name="fade" start="#0" end="#f" startDelay="500" length="500"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<onStartScreen name="move" timeType="exp" factor="3.5" direction="top" mode="in" startDelay="500" length="500"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<onEndScreen name="fade" startColor="#ffff" endColor="#0000" startDelay="500" length="500"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;</effect>&ndash;&gt;-->
+        <!--</image>-->
+        <!--</panel>-->
+        <!--</layer>-->
+
+        <layer id="inGameMainMenuLayer" childLayout="vertical">
+            <panel height="25%" childLayout="center"/>
+            <!--<panel childLayout="center">-->
+            <!--<panel id="mainMenu" font="menu.fnt" style="menu" childLayout="center" padding="50px,20px,60px,20px">-->
+            <panel id="inGameMenuPanel" childLayout="vertical" width="40%" height="43%" backgroundColor="#001f" align="center">
+                <!--<panel width="50%" childLayout="absolute">-->
+                <!--<image id="thumbHelloWorld" style="thumbStyle" x="150px" y="50px" filename="all/thumb-helloWorld.png"/>-->
+                <!--<image id="thumbTextAlign" style="thumbStyle" x="150px" y="50px" filename="all/thumb-textAlign.png"/>-->
+                <!--<image id="thumbTextField" style="thumbStyle" x="150px" y="50px" filename="all/thumb-textField.png"/>-->
+                <!--<image id="thumbDropDownList" style="thumbStyle" x="150px" y="50px" filename="all/thumb-dropDownList.png"/>-->
+                <!--<image id="thumbScrollpanel" style="thumbStyle" x="150px" y="50px" filename="all/thumb-scrollPanel.png"/>-->
+                <!--<image id="thumbMultiplayer" style="thumbStyle" x="150px" y="50px" filename="all/thumb-multiplayer.png"/>-->
+                <!--<image id="thumbConsole" style="thumbStyle" x="150px" y="50px" filename="all/thumb-console.png"/>-->
+                <!--<image id="thumbCredits" style="thumbStyle" x="150px" y="50px" filename="all/thumb-credits.png"/>-->
+                <!--<image id="thumbExit" style="thumbStyle" x="150px" y="50px" filename="all/thumb-exit.png"/>-->
+                <!--</panel>-->
+                <!--<control id="menuScrollPanel" name="scrollPanel" style="special-scrollpanel" horizontal="false" stepSizeY="30" height="100%">-->
+
+                <!--<panel id="huhu-1" childLayout="center" width="100%" height="420px" padding="0px,40px,0px,40px">-->
+                <!--<panel id="huhu-2" childLayout="vertical" width="100%">-->
+
+                <text id="returnToGame" text="Return to game" style="menu-item">
+                    <interact onClick="returnToGame()"/>
+                </text>
+                <panel height="2%" childLayout="center"/>
+                <text id="options" text="Options" style="menu-item">
+                    <interact onClick="options()"/>
+                </text>
+                <panel height="2%" childLayout="center"/>
+                <text id="about" text="About" style="menu-item">
+                    <interact onClick="about()" onClickAlternateKey="fade"/>
+                </text>
+                <panel height="2%" childLayout="center"/>
+                <text id="credits" text="Credits" style="menu-item">
+                    <interact onClick="credits()" onClickAlternateKey="fade"/>
+                </text>
+                <panel height="2%" childLayout="center"/>
+                <text id="exit" text="Exit" style="menu-item">
+                    <interact onClick="exit()"/>
+                </text>
+            </panel>
+
+            <!--</panel>-->
+            <!--<panel height="10%" id="hintArea" childLayout="center" align="center" valign="center">-->
+            <!--&lt;!&ndash;<effect>&ndash;&gt;-->
+            <!--&lt;!&ndash;<onStartScreen name="fade" startColor="#0000" endColor="#000f" length="500" inherit="true"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<onEndScreen name="fade" startColor="#000f" endColor="#0000" length="500" inherit="true"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;</effect>&ndash;&gt;-->
+            <!--<text id="hintElement" style="base-font" text="Welcome to Nifty Examples" align="center" valign="center"/>-->
+            <!--</panel>-->
+        </layer>
+
+        <layer id="notInGameMainMenuLayer" childLayout="vertical">
+            <panel height="25%" childLayout="center"/>
+
+            <panel id="notInGameMenuPanel" childLayout="vertical" width="40%" height="43%" backgroundColor="#001f" align="center">
+                <text id="aa1" text="Single player" style="menu-item">
+                    <interact onClick="singlePlayer()"/>
+                </text>
+                <panel height="2%" childLayout="center"/>
+                <text text="Multiplayer" style="menu-item">
+                    <interact onClick="multiplayer()"/>
+                </text>
+                <panel height="2%" childLayout="center"/>
+                <text text="Options" style="menu-item">
+                    <interact onClick="options()"/>
+                </text>
+                <panel height="2%" childLayout="center"/>
+                <text text="About" style="menu-item">
+                    <interact onClick="about()" onClickAlternateKey="fade"/>
+                </text>
+                <panel height="2%" childLayout="center"/>
+                <text text="Credits" style="menu-item">
+                    <interact onClick="credits()" onClickAlternateKey="fade"/>
+                </text>
+                <panel height="2%" childLayout="center"/>
+                <text text="Exit" style="menu-item">
+                    <interact onClick="exit()"/>
+                </text>
+            </panel>
+        </layer>
+    </screen>
+
+</nifty>

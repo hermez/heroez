@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty-styles>
+    <!-- +++++++++++++++++++++++++++++++++++++ -->
+    <!-- style for the button background panel -->
+    <!-- +++++++++++++++++++++++++++++++++++++ -->
+    <style id="nifty-button#panel">
+        <attributes width="100px" height="23px" childLayout="center" visibleToMouse="true"/>
+        <effect>
+            <onHover name="border" color="#576655" post="true"/>
+        </effect>
+    </style>
+
+    <!-- +++++++++++++++++++++++++++++++++++++ -->
+    <!-- style for the button text -->
+    <!-- +++++++++++++++++++++++++++++++++++++ -->
+    <style id="nifty-button#text" base="button-font">
+        <attributes align="center" valign="center" textHAlign="center" textVAlign="center" visibleToMouse="false" color="#829b61ff"/>
+    </style>
+</nifty-styles>

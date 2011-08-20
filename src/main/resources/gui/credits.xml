@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty>
+
+    <useStyles filename="heroez-gui-styles.xml"/>
+    <useControls filename="nifty-default-controls.xml"/>
+
+    <style id="credits-item" base="credits-font">
+        <attributes align="center" textHAlign="center" color="#7f9465ff" width="100%"/>
+    </style>
+    <style id="credits-font">
+        <attributes font="aurulent-sans-16.fnt"/>
+    </style>
+
+    <screen id="start" controller="net.hermesprime.rpg.heroez.gui.controller.CreditsController">
+        <layer id="text" childLayout="vertical">
+            <panel height="25%" childLayout="center"/>
+            <panel childLayout="vertical" width="40%" height="43%" backgroundColor="#001f" align="center">
+                <panel height="47%" childLayout="center"/>
+                <text id="authors" text="Application so far created by Hermez." style="credits-item"/>
+            </panel>
+
+            <panel childLayout="vertical" width="38%" align="right">
+                <control id="backButton" name="button" label="Back" align="left">
+                    <interact onClick="back()"/>
+                </control>
+            </panel>
+        </layer>
+    </screen>
+
+</nifty>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty>
+
+    <useStyles filename="heroez-gui-styles.xml"/>
+    <useControls filename="nifty-default-controls.xml"/>
+
+    <registerSound id="select" filename="sound/select.ogg"/>
+
+    <!--<style id="menu">-->
+        <!--<attributes align="left" valign="center" width="1024px" height="409px"/>-->
+    <!--</style>-->
+    <style id="menu-font">
+        <attributes font="aurulent-sans-36-bold-with-shadow.fnt"/>
+    </style>
+
+    <style id="menu-item" base="menu-font">
+        <attributes align="center" textHAlign="center" color="#7f9465ff" width="100%"
+                    focusable="true"
+                    controller="de.lessvoid.nifty.controls.MenuItemControl"
+                    inputMapping="de.lessvoid.nifty.input.mapping.MenuInputMapping"/>
+        <effect>
+            <onHover name="focus"/>
+            <!--<onFocus name="hint" targetElement="hintElement" hintText="$hintText"/>-->
+            <onFocus name="colorBar" width="70%" height="110%" color="#0024"/>
+            <onFocus name="textColor" color="#b3b11bff"/>
+            <onFocus name="textSize" startSize="1.0" endSize="1.1" length="130"/>
+            <onFocus name="playSound" sound="select"/>
+            <onLostFocus name="textSize" startSize="1.1" endSize="1.0"/>
+        </effect>
+    </style>
+
+    <screen id="start" controller="net.hermesprime.rpg.heroez.gui.controller.MultiplayerScreen">
+
+        <layer id="menu" childLayout="vertical">
+            <panel height="25%" childLayout="center"/>
+            <panel childLayout="vertical" width="40%" height="43%" backgroundColor="#001f" align="center">
+
+                <text id="newCampaign" text="New campaign" style="menu-item">
+                    <interact onClick="newCampaign()"/>
+                </text>
+                <panel height="2%" childLayout="center"/>
+                <text id="newScenario" text="New scenario" style="menu-item">
+                    <interact onClick="newScenario()"/>
+                </text>
+                <panel height="2%" childLayout="center"/>
+                <text id="loadGame" text="Load game" style="menu-item">
+                    <interact onClick="loadGame()"/>
+                </text>
+
+            </panel>
+
+            <panel childLayout="vertical" width="38%" align="right">
+                <control id="backButton" name="button" label="Back" align="left">
+                    <interact onClick="back()"/>
+                </control>
+            </panel>
+        </layer>
+    </screen>
+
+</nifty>

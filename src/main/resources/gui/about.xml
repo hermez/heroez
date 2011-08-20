@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty>
+
+    <useStyles filename="heroez-gui-styles.xml"/>
+    <useControls filename="nifty-default-controls.xml"/>
+
+    <style id="credits-item" base="credits-font">
+        <attributes color="#7f9465ff" align="center"/>
+    </style>
+    <style id="credits-font">
+        <attributes font="aurulent-sans-16.fnt"/>
+    </style>
+
+    <screen id="start" controller="net.hermesprime.rpg.heroez.gui.controller.CreditsController">
+        <layer id="text" childLayout="vertical">
+            <panel height="23%" childLayout="center"/>
+            <panel childLayout="vertical" width="40%" height="43%" backgroundColor="#001f" align="center">
+                <panel height="25%" childLayout="center"/>
+                <text text="*" style="credits-item"/>
+                <text text="This is so far rpg adventure editor." style="credits-item"/>
+                <text text="*" style="credits-item"/>
+                <text text="There is a chance it can transform to game." style="credits-item"/>
+                <text text="*" style="credits-item"/>
+                <text text="Current vision is little bit based on rough contact with HOMM5." style="credits-item"/>
+                <text text="Some things are not right there so there's reason for totally new game." style="credits-item"/>
+                <text text="*" style="credits-item"/>
+                <text text="Would be nice to make it very role-playing style." style="credits-item"/>
+                <text text="*" style="credits-item"/>
+            </panel>
+
+            <panel childLayout="vertical" width="38%" align="right">
+                <control id="backButton" name="button" label="Back" align="left">
+                    <interact onClick="back()"/>
+                </control>
+            </panel>
+        </layer>
+    </screen>
+
+</nifty>
