@@ -1,1 +1,32 @@
-This file was created by IntelliJ IDEA (Community Edition) IC-107.535 for binding GitHub repository
+This is Heroez.
+
+1. What you need ?
+
+-jme3 libs
+applet-loader.zip
+eventbus-1.4.jar
+j-ogg-oggd.jar
+j-ogg-vorbisd.jar
+jbullet.jar
+jheora-jst-debug-0.6.0.jar
+jinput.jar
+jME3-lwjgl-natives.jar
+jme3testdata.jar
+jMonkeyEngine3-javadoc.zip
+jMonkeyEngine3-sources.zip
+jMonkeyEngine3.jar
+launch4j.jar
+lwjgl.jar
+stack-alloc.jar
+vecmath.jar
+xmlpull-xpp3-1.1.4c.jar
+xstream.jar
+
+-nifty gui libs
+nifty-1.3-SNAPSHOT.jar
+nifty-default-controls-1.3-SNAPSHOT.jar
+nifty-examples-1.3-SNAPSHOT.jar
+nifty-style-black-1.3-SNAPSHOT.jar
+
+-java
+java 6, but you can try with 7
