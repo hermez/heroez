@@ -12,8 +12,6 @@ public class HeroezSettings {
     public static final int GAME_LOOP_MENU_MODE_DELAY = 100;
     private AppSettings appSettings;
 
-    public final static String INPUT_MAPPING_SHOW_MAIN_MENU = "HEROEZ_ShowMainMenu";
-
     public AppSettings getAppSettings() {
         return appSettings;
     }

@@ -6,6 +6,7 @@ import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.system.AppSettings;
 import com.jme3.system.JmeContext;
 import de.lessvoid.nifty.Nifty;
+import net.hermesprime.rpg.heroez.gui.camera.ExtendedFlyByCamera;
 import net.hermesprime.rpg.heroez.gui.controller.*;
 import net.hermesprime.rpg.heroez.gui.listener.GuiListener;
 import net.hermesprime.rpg.heroez.input.HeroezInputSettings;
@@ -61,10 +62,29 @@ public class Heroez extends SimpleApplication {
         }
     }
 
+//    @Override
+//    public void initialize() {
+//        super.initialize();
+//
+//        guiNode.setQueueBucket(RenderQueue.Bucket.Gui);
+//        guiNode.setCullHint(Spatial.CullHint.Never);
+//        loadFPSText();
+//        loadStatsView();
+//        viewPort.attachScene(rootNode);
+//        guiViewPort.attachScene(guiNode);
+//
+//        setupInput();
+//
+//        // call user code
+//        simpleInitApp();
+//    }
+
     @Override
     public void simpleInitApp() {
         createMenu();
+
         setupInput();
+
         createGameView();
         Mouse.setGrabbed(false);//lwjgl
         if (devel) {
@@ -84,14 +104,22 @@ public class Heroez extends SimpleApplication {
      * Esc - go back from game to menu, no exit from game.
      */
     private void setupInput() {
+        final GuiListener guiListener = new GuiListener(this);
+
+        //old one
+        flyCam.setEnabled(false);
+        //new one
+        flyCam = new ExtendedFlyByCamera(cam);
+        flyCam.setMoveSpeed(3f);
+        flyCam.registerWithInput(inputManager);
+        flyCam.setDragToRotate(true);
+
         if (context.getType() == JmeContext.Type.Display) {
-            HeroezInputSettings.setupInputManager(inputManager, new GuiListener(this));
+            HeroezInputSettings.setupInputManager(inputManager, guiListener);
         }
 
-        flyCam.setMoveSpeed(2f);
-
         //cam.setFrustumPerspective(45f, (float)cam.getWidth() / cam.getHeight(), 1f, 1000f);
-        cam.setLocation(new Vector3f(0f, 0f, 5f));
+        cam.setLocation(new Vector3f(1f, 5f, 9f));
         cam.lookAt(new Vector3f(0f, 0f, 0f), Vector3f.UNIT_Y);
     }
 

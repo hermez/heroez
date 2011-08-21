@@ -2,6 +2,7 @@ package net.hermesprime.rpg.heroez.gui.listener;
 
 import com.jme3.input.controls.ActionListener;
 import net.hermesprime.rpg.heroez.Heroez;
+import net.hermesprime.rpg.heroez.input.HeroezInputSettings;
 
 import java.util.logging.Logger;
 
@@ -21,7 +22,10 @@ public class GuiListener implements ActionListener {
 
     @Override
     public void onAction(final String name, final boolean isPressed, final float tpf) {
-        logger.info("name=" + name + " isPressed=" + isPressed + " tpf=" + tpf);//rem
-        application.setMenuMode(true);
+        if (HeroezInputSettings.INPUT_MAPPING_SHOW_MAIN_MENU.equals(name)) {
+            application.setMenuMode(true);
+        } else {
+            logger.info("action=" + name + " isPressed=" + isPressed + " tpf=" + tpf);
+        }
     }
 }
