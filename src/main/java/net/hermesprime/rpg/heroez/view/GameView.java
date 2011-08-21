@@ -1,13 +1,9 @@
 package net.hermesprime.rpg.heroez.view;
 
 import com.jme3.asset.AssetManager;
-import com.jme3.material.Material;
-import com.jme3.math.ColorRGBA;
-import com.jme3.math.Vector3f;
-import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import com.jme3.scene.shape.Box;
-import com.jme3.scene.shape.Line;
+import net.hermesprime.rpg.heroez.view.plain.PlainView;
+import net.hermesprime.rpg.heroez.view.util.Axis;
 
 /**
  * User: moore
@@ -25,68 +21,34 @@ public class GameView {
     }
 
     public void initTerrain() {
+        PlainView.fillTerrain(rootNode, assetManager);
+        Axis.fillView(rootNode, assetManager);
+
+
+////        // create a blue box at coordinates (1,-1,1)
+//        Box box1 = new Box(new Vector3f(0, 0, 0), 0.5f, 0.5f, 0.5f);
+//        Geometry blue = new Geometry("Box", box1);
+//        Material mat1 = new Material(assetManager, "Common/MatDefs/Misc/WireColor.j3md");
+//        mat1.setColor("Color", ColorRGBA.Brown);
+//        blue.setMaterial(mat1);
+////        // create a red box straight above the blue one at (1,3,1)
+////        Box box2 = new Box(new Vector3f(1, 3, 1), 1, 1, 1);
+////        Geometry red = new Geometry("Box", box2);
+////        Material mat2 = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+////        mat2.setColor("Color", ColorRGBA.Red);
+////        red.setMaterial(mat2);
+////        // create a pivot node at (0,0,0) and attach it to root
+//        Node pivot = new Node("pivot");
+//        rootNode.attachChild(pivot);
+//        // attach the two boxes to the *pivot* node!
+//        pivot.attachChild(blue);
+////        pivot.attachChild(red);
+////        // rotate pivot node: Both boxes have rotated!
+////        pivot.rotate(0.4f, 0.4f, 0.0f);
+
+
         //Material mat = new Material(assetManager, "Common/MatDefs/Misc/SolidColor.j3md");
-//        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-
-//        // create a blue box at coordinates (1,-1,1)
-        Box box1 = new Box(new Vector3f(0, 0, 0), 0.5f, 0.5f, 0.5f);
-        Geometry blue = new Geometry("Box", box1);
-        Material mat1 = new Material(assetManager, "Common/MatDefs/Misc/WireColor.j3md");
-        mat1.setColor("Color", ColorRGBA.Brown);
-        blue.setMaterial(mat1);
-//        // create a red box straight above the blue one at (1,3,1)
-//        Box box2 = new Box(new Vector3f(1, 3, 1), 1, 1, 1);
-//        Geometry red = new Geometry("Box", box2);
-//        Material mat2 = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-//        mat2.setColor("Color", ColorRGBA.Red);
-//        red.setMaterial(mat2);
-//        // create a pivot node at (0,0,0) and attach it to root
-        Node pivot = new Node("pivot");
-        rootNode.attachChild(pivot);
-        // attach the two boxes to the *pivot* node!
-        pivot.attachChild(blue);
-//        pivot.attachChild(red);
-//        // rotate pivot node: Both boxes have rotated!
-//        pivot.rotate(0.4f, 0.4f, 0.0f);
-
-
-        Vector3f origin = Vector3f.ZERO;
-        Vector3f o000 = new Vector3f(0, 0, 0);
-
-        Material matx = new Material(assetManager, "Common/MatDefs/Misc/SolidColor.j3md");
-        matx.setColor("Color", ColorRGBA.Pink);
-        Material maty = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        maty.setColor("Color", ColorRGBA.Yellow);
-        Material matz = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        matz.setColor("Color", ColorRGBA.Cyan);
-
-        Material matx_ = new Material(assetManager, "Common/MatDefs/Misc/SolidColor.j3md");
-        matx_.setColor("Color", ColorRGBA.Red);
-        Material maty_ = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        maty_.setColor("Color", ColorRGBA.Green);
-        Material matz_ = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        matz_.setColor("Color", ColorRGBA.Blue);
-
-        Geometry geomX = new Geometry("x", new Line(origin, new Vector3f(5, 0, 0)));
-        Geometry geomY = new Geometry("y", new Line(origin, new Vector3f(0, 5, 0)));
-        Geometry geomZ = new Geometry("z", new Line(new Vector3f(1, 0, 0), new Vector3f(0, 0, 5)));
-        Geometry geomX_ = new Geometry("-x", new Line(origin, new Vector3f(-5, 0, 0)));
-        Geometry geomY_ = new Geometry("-y", new Line(origin, new Vector3f(0, -5, 0)));
-        Geometry geomZ_ = new Geometry("-z", new Line(new Vector3f(-1, 0, 0), new Vector3f(0, 0, -5)));
-
-        geomX.setMaterial(matx);
-        geomY.setMaterial(maty);
-        geomZ.setMaterial(matz);
-        geomX_.setMaterial(matx_);
-        geomY_.setMaterial(maty_);
-        geomZ_.setMaterial(matz_);
-
-        rootNode.attachChild(geomX);
-        rootNode.attachChild(geomY);
-        rootNode.attachChild(geomZ);
-        rootNode.attachChild(geomX_);
-        rootNode.attachChild(geomY_);
-        rootNode.attachChild(geomZ_);
+        //Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
     }
 
     public void initGui() {

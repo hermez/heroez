@@ -5,6 +5,7 @@ import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.InputListener;
 import com.jme3.input.controls.KeyTrigger;
+import com.jme3.math.Vector3f;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.system.AppSettings;
 import com.jme3.system.JmeContext;
@@ -102,6 +103,12 @@ public class Heroez extends SimpleApplication {
 //          inputManager.addMapping("SIMPLEAPP_Exit", new KeyTrigger(KeyInput.KEY_ESCAPE));
 //          inputManager.addListener(actionListener, "SIMPLEAPP_Exit","SIMPLEAPP_CameraPos", "SIMPLEAPP_Memory");
         }
+
+        flyCam.setMoveSpeed(2f);
+
+        //cam.setFrustumPerspective(45f, (float)cam.getWidth() / cam.getHeight(), 1f, 1000f);
+        cam.setLocation(new Vector3f(0f, 0f, 5f));
+        cam.lookAt(new Vector3f(0f, 0f, 0f), Vector3f.UNIT_Y);
     }
 
     /**
