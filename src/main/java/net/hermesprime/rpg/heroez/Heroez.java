@@ -9,6 +9,7 @@ import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.system.AppSettings;
 import com.jme3.system.JmeContext;
 import de.lessvoid.nifty.Nifty;
+import net.hermesprime.rpg.heroez.gui.controller.*;
 import net.hermesprime.rpg.heroez.logic.GameLogic;
 import net.hermesprime.rpg.heroez.util.HeroezSettings;
 import net.hermesprime.rpg.heroez.view.GameView;
