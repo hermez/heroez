@@ -15,6 +15,7 @@ public class GameLogic {
 
     private final Set<Player> players = new HashSet<Player>();
 
+
     public void initPlayers() {
         players.add(new Player());
     }
