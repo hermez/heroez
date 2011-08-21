@@ -1,5 +1,6 @@
 package net.hermesprime.rpg.heroez.logic;
 
+import net.hermesprime.rpg.heroez.model.map.Map;
 import net.hermesprime.rpg.heroez.model.player.Player;
 
 import java.util.Collections;
@@ -14,7 +15,11 @@ import java.util.Set;
 public class GameLogic {
 
     private final Set<Player> players = new HashSet<Player>();
+    private Map map;
 
+    public void setMap(final Map map) {
+        this.map = map;
+    }
 
     public void initPlayers() {
         players.add(new Player());

@@ -1,17 +1,16 @@
 package net.hermesprime.rpg.heroez;
 
 import com.jme3.app.SimpleApplication;
-import com.jme3.input.KeyInput;
-import com.jme3.input.controls.ActionListener;
-import com.jme3.input.controls.InputListener;
-import com.jme3.input.controls.KeyTrigger;
 import com.jme3.math.Vector3f;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.system.AppSettings;
 import com.jme3.system.JmeContext;
 import de.lessvoid.nifty.Nifty;
 import net.hermesprime.rpg.heroez.gui.controller.*;
+import net.hermesprime.rpg.heroez.gui.listener.GuiListener;
+import net.hermesprime.rpg.heroez.input.HeroezInputSettings;
 import net.hermesprime.rpg.heroez.logic.GameLogic;
+import net.hermesprime.rpg.heroez.model.map.Map;
 import net.hermesprime.rpg.heroez.util.HeroezSettings;
 import net.hermesprime.rpg.heroez.view.GameView;
 import org.lwjgl.input.Mouse;
@@ -64,8 +63,8 @@ public class Heroez extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
-        setupInput();
         createMenu();
+        setupInput();
         createGameView();
         Mouse.setGrabbed(false);//lwjgl
         if (devel) {
@@ -85,23 +84,8 @@ public class Heroez extends SimpleApplication {
      * Esc - go back from game to menu, no exit from game.
      */
     private void setupInput() {
-        if (inputManager != null) {
-            if (context.getType() == JmeContext.Type.Display) {
-                inputManager.deleteMapping("SIMPLEAPP_Exit");
-            }
-            inputManager.addMapping(HeroezSettings.INPUT_MAPPING_SHOW_MAIN_MENU, new KeyTrigger(KeyInput.KEY_ESCAPE));
-            final InputListener inputListener = new ActionListener() {
-                @Override
-                public void onAction(final String name, final boolean isPressed, final float tpf) {
-                    logger.info("name=" + name + " isPressed=" + isPressed + " tpf=" + tpf);//rem
-                    setMenuMode(true);
-                    nifty.fromXml("gui/mainMenu.xml", "start");
-                }
-            };
-            inputManager.addListener(inputListener, HeroezSettings.INPUT_MAPPING_SHOW_MAIN_MENU);
-
-//          inputManager.addMapping("SIMPLEAPP_Exit", new KeyTrigger(KeyInput.KEY_ESCAPE));
-//          inputManager.addListener(actionListener, "SIMPLEAPP_Exit","SIMPLEAPP_CameraPos", "SIMPLEAPP_Memory");
+        if (context.getType() == JmeContext.Type.Display) {
+            HeroezInputSettings.setupInputManager(inputManager, new GuiListener(this));
         }
 
         flyCam.setMoveSpeed(2f);
@@ -119,7 +103,7 @@ public class Heroez extends SimpleApplication {
     private void createMenu() {
         niftyDisplay = new NiftyJmeDisplay(assetManager, inputManager, audioRenderer, guiViewPort);
         nifty = niftyDisplay.getNifty();
-        nifty.fromXml("gui/mainMenu.xml", "start",
+        nifty.registerScreenController(
                 new MainMenuScreen(this),
                 new CreditsController(this),
                 new SinglePlayerScreen(this),
@@ -127,8 +111,13 @@ public class Heroez extends SimpleApplication {
                 new OptionsScreen(this));
     }
 
+    private void showMainMenu() {
+        nifty.fromXml("gui/mainMenu.xml", "start");
+    }
+
     private void createGameLogic() {
         gameLogic = new GameLogic();
+        gameLogic.setMap(new Map(5, 5));
     }
 
     /**
@@ -148,6 +137,7 @@ public class Heroez extends SimpleApplication {
     public void setMenuMode(final boolean menuMode) {
         this.menuMode = menuMode;
         if (menuMode) {
+            nifty.fromXml("gui/mainMenu.xml", "start");
             guiViewPort.addProcessor(niftyDisplay);// attach the nifty display to the gui view port as a processor
             flyCam.setEnabled(false);
         } else {
