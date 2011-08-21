@@ -5,19 +5,13 @@ import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.InputListener;
 import com.jme3.input.controls.KeyTrigger;
-import com.jme3.material.Material;
-import com.jme3.math.ColorRGBA;
-import com.jme3.math.Vector3f;
 import com.jme3.niftygui.NiftyJmeDisplay;
-import com.jme3.scene.Geometry;
-import com.jme3.scene.Node;
-import com.jme3.scene.shape.Box;
 import com.jme3.system.AppSettings;
 import com.jme3.system.JmeContext;
 import de.lessvoid.nifty.Nifty;
-import net.hermesprime.rpg.heroez.gameView.GameView;
-import net.hermesprime.rpg.heroez.gui.controller.*;
+import net.hermesprime.rpg.heroez.logic.GameLogic;
 import net.hermesprime.rpg.heroez.util.HeroezSettings;
+import net.hermesprime.rpg.heroez.view.GameView;
 import org.lwjgl.input.Mouse;
 
 import java.util.logging.Level;
@@ -37,6 +31,8 @@ public class Heroez extends SimpleApplication {
     private boolean inGame = false;
     private NiftyJmeDisplay niftyDisplay;
     private GameView gameView;
+    private GameLogic gameLogic;
+    private boolean devel = true;
 
     public Heroez() {
         heroezSettings = new HeroezSettings();
@@ -70,7 +66,11 @@ public class Heroez extends SimpleApplication {
         createMenu();
         createGameView();
         Mouse.setGrabbed(false);//lwjgl
-        setMenuMode(true);
+        if (devel) {
+            newScenario();
+        } else {
+            setMenuMode(true);
+        }
     }
 
     private void createGameView() {
@@ -119,10 +119,15 @@ public class Heroez extends SimpleApplication {
                 new OptionsScreen(this));
     }
 
+    private void createGameLogic() {
+        gameLogic = new GameLogic();
+    }
+
     /**
      * Starts new scenario.
      */
     public void newScenario() {
+        createGameLogic();
         gameView.initTerrain();
         inGame = true;
     }

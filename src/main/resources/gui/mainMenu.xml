@@ -10,7 +10,7 @@
     </style>
 
     <!--<style id="menu">-->
-        <!--<attributes align="left" valign="center" width="1024px" height="409px"/>-->
+    <!--<attributes align="left" valign="center" width="1024px" height="409px"/>-->
     <!--</style>-->
     <style id="menu-font">
         <attributes font="aurulent-sans-36-bold-with-shadow.fnt"/>
@@ -58,7 +58,7 @@
             <panel height="25%" childLayout="center"/>
             <!--<panel childLayout="center">-->
             <!--<panel id="mainMenu" font="menu.fnt" style="menu" childLayout="center" padding="50px,20px,60px,20px">-->
-            <panel id="inGameMenuPanel" childLayout="vertical" width="40%" height="43%" backgroundColor="#001f" align="center">
+            <panel id="inGameMenuPanel" childLayout="vertical" width="40%" height="43%" backgroundColor="#001a" align="center">
                 <!--<panel width="50%" childLayout="absolute">-->
                 <!--<image id="thumbHelloWorld" style="thumbStyle" x="150px" y="50px" filename="all/thumb-helloWorld.png"/>-->
                 <!--<image id="thumbTextAlign" style="thumbStyle" x="150px" y="50px" filename="all/thumb-textAlign.png"/>-->
@@ -75,6 +75,7 @@
                 <!--<panel id="huhu-1" childLayout="center" width="100%" height="420px" padding="0px,40px,0px,40px">-->
                 <!--<panel id="huhu-2" childLayout="vertical" width="100%">-->
 
+                <panel height="8%" childLayout="center"/>
                 <text id="returnToGame" text="Return to game" style="menu-item">
                     <interact onClick="returnToGame()"/>
                 </text>
@@ -109,7 +110,7 @@
         <layer id="notInGameMainMenuLayer" childLayout="vertical">
             <panel height="25%" childLayout="center"/>
 
-            <panel id="notInGameMenuPanel" childLayout="vertical" width="40%" height="43%" backgroundColor="#001f" align="center">
+            <panel id="notInGameMenuPanel" childLayout="vertical" width="40%" height="43%" backgroundColor="#001a" align="center">
                 <text id="aa1" text="Single player" style="menu-item">
                     <interact onClick="singlePlayer()"/>
                 </text>

@@ -1,4 +1,4 @@
-package net.hermesprime.rpg.heroez.story;
+package net.hermesprime.rpg.heroez.model.story;
 
 /**
  * User: moore
