@@ -17,7 +17,7 @@ public class Map {
      */
     private int width;
 
-    public Map(int length, int width) {
+    public Map(final int length, final int width) {
         this.length = length;
         this.width = width;
     }

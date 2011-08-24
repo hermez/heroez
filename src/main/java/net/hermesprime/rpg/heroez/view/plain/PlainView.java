@@ -7,8 +7,12 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.shape.Box;
+import com.jme3.scene.shape.Cylinder;
 import com.jme3.scene.shape.Quad;
+import net.hermesprime.rpg.heroez.model.player.Player;
 import net.hermesprime.rpg.heroez.view.util.QuaternionSheet;
+
+import java.util.Set;
 
 /**
  * User: moore
@@ -64,5 +68,22 @@ public class PlainView {
         seaLevelNode.setLocalTranslation(new Vector3f(-WIDTH, 0, HEIGHT));
 
         return seaLevelNode;
+    }
+
+    public static void addPlayers(final Node rootNode, final AssetManager assetManager, final Set<Player> players) {
+        rootNode.attachChild(getPlayer(assetManager, 1f, 1, 0, ColorRGBA.Orange));
+
+
+    }
+
+    private static Geometry getPlayer(final AssetManager assetManager, final float posx, final float posy, final float posz, final ColorRGBA colorRGBA) {
+        final Cylinder cylinder = new Cylinder(10, 10, 0.1f, 0.2f, true);
+        final Geometry geometry = new Geometry("Box", cylinder);
+        final Material material = new Material(assetManager, "Common/MatDefs/Misc/SolidColor.j3md");
+        material.setColor("Color", colorRGBA);
+        geometry.setMaterial(material);
+        geometry.move(new Vector3f(posx, posy, posz));
+        geometry.setLocalRotation(QuaternionSheet.PITCH_90);
+        return geometry;
     }
 }

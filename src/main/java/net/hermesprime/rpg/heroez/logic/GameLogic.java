@@ -16,6 +16,8 @@ public class GameLogic {
 
     private final Set<Player> players = new HashSet<Player>();
     private Map map;
+    private Rules rules;
+    private GameObjects gameObjects = new GameObjects();
 
     public void setMap(final Map map) {
         this.map = map;
@@ -27,5 +29,9 @@ public class GameLogic {
 
     public Set<Player> getPlayers() {
         return Collections.unmodifiableSet(players);
+    }
+
+    public GameObjects getGameObjects() {
+        return gameObjects;
     }
 }

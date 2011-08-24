@@ -11,6 +11,7 @@ import net.hermesprime.rpg.heroez.gui.controller.*;
 import net.hermesprime.rpg.heroez.gui.listener.GuiListener;
 import net.hermesprime.rpg.heroez.input.HeroezInputSettings;
 import net.hermesprime.rpg.heroez.logic.GameLogic;
+import net.hermesprime.rpg.heroez.logic.GameObjects;
 import net.hermesprime.rpg.heroez.model.map.Map;
 import net.hermesprime.rpg.heroez.util.HeroezSettings;
 import net.hermesprime.rpg.heroez.view.GameView;
@@ -34,6 +35,7 @@ public class Heroez extends SimpleApplication {
     private NiftyJmeDisplay niftyDisplay;
     private GameView gameView;
     private GameLogic gameLogic;
+    private GameObjects gameObjects;
     private boolean devel = true;
 
     public Heroez() {
@@ -82,9 +84,7 @@ public class Heroez extends SimpleApplication {
     @Override
     public void simpleInitApp() {
         createMenu();
-
         setupInput();
-
         createGameView();
         Mouse.setGrabbed(false);//lwjgl
         if (devel) {
@@ -110,9 +110,7 @@ public class Heroez extends SimpleApplication {
         flyCam.setEnabled(false);
         //new one
         flyCam = new ExtendedFlyByCamera(cam);
-        flyCam.setMoveSpeed(3f);
         flyCam.registerWithInput(inputManager);
-        flyCam.setDragToRotate(true);
 
         if (context.getType() == JmeContext.Type.Display) {
             HeroezInputSettings.setupInputManager(inputManager, guiListener);
@@ -154,6 +152,7 @@ public class Heroez extends SimpleApplication {
     public void newScenario() {
         createGameLogic();
         gameView.initTerrain();
+        gameView.initObjects();
         inGame = true;
     }
 
