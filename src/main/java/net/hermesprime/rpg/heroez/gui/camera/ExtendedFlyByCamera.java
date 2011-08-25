@@ -7,6 +7,7 @@ import com.jme3.input.controls.MouseAxisTrigger;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
+import net.hermesprime.rpg.heroez.util.HeroezSettings;
 
 /**
  * User: moore
@@ -15,12 +16,24 @@ import com.jme3.renderer.Camera;
  */
 public class ExtendedFlyByCamera extends FlyByCamera {
 
-    float zoomSpeed = 1.2f;
-    float bbb = .5f;
+    private float zoomSpeed = 1.2f;
+    private float moveSpeed = 4f;
+    private float anotherZoomSpeed = .5f;
 
 
-    public ExtendedFlyByCamera(final Camera cam) {
+    public ExtendedFlyByCamera(final Camera cam, final HeroezSettings heroezSettings) {
         super(cam);
+        zoomSpeed = heroezSettings.getPropertyFloat("camera.gameView.flyBy.zoomSpeed");
+        moveSpeed = heroezSettings.getPropertyFloat("camera.gameView.flyBy.moveSpeed");
+        anotherZoomSpeed = heroezSettings.getPropertyFloat("camera.gameView.flyBy.anotherZoomSpeed");
+    }
+
+    @Override
+    public void registerWithInput(InputManager inputManager) {
+        super.registerWithInput(inputManager);
+        reverseZoom(inputManager);
+        setMoveSpeed(moveSpeed);
+        setDragToRotate(true);
     }
 
     /**
@@ -38,12 +51,11 @@ public class ExtendedFlyByCamera extends FlyByCamera {
 
         float near = cam.getFrustumNear();
 
-        float fovY = FastMath.atan(h / near)
-                / (FastMath.DEG_TO_RAD * bbb);
+        float fovY = FastMath.atan(h / near) / (FastMath.DEG_TO_RAD * anotherZoomSpeed);
 
         fovY += value * zoomSpeed;
 
-        h = FastMath.tan(fovY * FastMath.DEG_TO_RAD * bbb) * near;
+        h = FastMath.tan(fovY * FastMath.DEG_TO_RAD * anotherZoomSpeed) * near;
         w = h * aspect;
 
         cam.setFrustumTop(h);
@@ -61,22 +73,13 @@ public class ExtendedFlyByCamera extends FlyByCamera {
         this.zoomSpeed = zoomSpeed;
     }
 
-    @Override
-    public void registerWithInput(InputManager inputManager) {
-        super.registerWithInput(inputManager);
-        reverseZoom(inputManager);
-        setMoveSpeed(4f);
-        setDragToRotate(true);
-    }
-
     private void reverseZoom(final InputManager inputManager) {
         inputManager.deleteMapping("FLYCAM_ZoomIn");
         inputManager.deleteMapping("FLYCAM_ZoomOut");
         // add my own - reverse
         inputManager.addMapping("FLYCAM_ZoomIn", new MouseAxisTrigger(MouseInput.AXIS_WHEEL, true));
         inputManager.addMapping("FLYCAM_ZoomOut", new MouseAxisTrigger(MouseInput.AXIS_WHEEL, false));
-        inputManager.addListener(this, "FLYCAM_ZoomIn",
-                "FLYCAM_ZoomOut");
+        inputManager.addListener(this, "FLYCAM_ZoomIn", "FLYCAM_ZoomOut");
     }
 
     @Override

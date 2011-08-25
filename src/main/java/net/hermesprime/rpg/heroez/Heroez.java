@@ -13,10 +13,16 @@ import net.hermesprime.rpg.heroez.input.HeroezInputSettings;
 import net.hermesprime.rpg.heroez.logic.GameLogic;
 import net.hermesprime.rpg.heroez.logic.GameObjects;
 import net.hermesprime.rpg.heroez.model.map.Map;
+import net.hermesprime.rpg.heroez.util.HeroezException;
 import net.hermesprime.rpg.heroez.util.HeroezSettings;
 import net.hermesprime.rpg.heroez.view.GameView;
 import org.lwjgl.input.Mouse;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashSet;
+import java.util.Properties;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,14 +42,32 @@ public class Heroez extends SimpleApplication {
     private GameView gameView;
     private GameLogic gameLogic;
     private GameObjects gameObjects;
-    private boolean devel = true;
+    private final boolean devel;
 
     public Heroez() {
-        heroezSettings = new HeroezSettings();
+        heroezSettings = new HeroezSettings(loadProps());
         setShowSettings(false);
         heroezSettings.setAppSettings(new AppSettings(true));
         setSettings(heroezSettings.getAppSettings());
-        settings.setResolution(1280, 768);
+        settings.setResolution(heroezSettings.getPropertyInt("resolution.width"), heroezSettings.getPropertyInt("resolution.height"));
+        devel = heroezSettings.getPropertyBoolean("heroez.devel");
+    }
+
+    public Set<Properties> loadProps() {
+        final InputStream in = getClass().getClassLoader().getResourceAsStream("heroez.properties");
+        if (in != null) {
+            final HashSet<Properties> set = new HashSet<Properties>();
+            try {
+                final Properties configProp = new Properties();
+                configProp.load(in);
+                set.add(configProp);
+            } catch (IOException e) {
+                logger.log(Level.WARNING, "Failed to load properties", e);
+            }
+            return set;
+        } else {
+            throw new HeroezException("Failed to load properties");
+        }
     }
 
     public static void main(final String... args) {
@@ -109,7 +133,7 @@ public class Heroez extends SimpleApplication {
         //old one
         flyCam.setEnabled(false);
         //new one
-        flyCam = new ExtendedFlyByCamera(cam);
+        flyCam = new ExtendedFlyByCamera(cam, heroezSettings);
         flyCam.registerWithInput(inputManager);
 
         if (context.getType() == JmeContext.Type.Display) {
